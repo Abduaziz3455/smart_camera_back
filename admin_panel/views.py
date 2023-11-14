@@ -47,7 +47,6 @@ class EmployeeViewSet(Client_Viewsub):
     serializer_class = EmployeeSerializer
     search_fields = ['name']
     filter_backends = [DjangoFilterBackend, searchf.SearchFilter]
-    filterset_fields = ['is_client']
     # pagination_class = CustomUserPagination
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]

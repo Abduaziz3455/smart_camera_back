@@ -53,7 +53,6 @@ class Employee(Model):
     last_leave_time = DateTimeField(auto_now_add=True)
     stay_time = IntegerField(default=0)
     date = DateField(auto_now_add=True)
-    is_client = BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -69,7 +68,6 @@ class EmployeeTime(Model):
     last_leave_time = DateTimeField(auto_now_add=True)
     stay_time = IntegerField(default=0)
     date = DateField(auto_now_add=True)
-    is_client = BooleanField(default=False)
 
     def __str__(self) -> str:
         return f"{self.employee.name} - {self.date}"

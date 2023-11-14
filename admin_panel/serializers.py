@@ -48,6 +48,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
             data['image'] = data['image'].replace(f"{BASE_URL}/media", "/media")
         if data['last_image']:
             data['last_image'] = data['last_image'].replace(f"{BASE_URL}/media", "/media")
+        return data
+
 
     class Meta:
         model = Employee
