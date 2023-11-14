@@ -30,15 +30,6 @@ class Client(Model):
     def __str__(self):
         return self.name
 
-    # def save(self, *args, **kwargs):
-    #     self.image = self.valid_extension(self.image)
-    #     super().save(*args, **kwargs)
-    #
-    # def valid_extension(self, img):
-    #     allowed_exts = ['.jpg', 'jpeg', 'png']
-    #     if img.name in allowed_exts:
-    #         return img.path
-
     class Meta:
         db_table = 'client'
 
@@ -72,6 +63,39 @@ class EmployeeTime(Model):
     def __str__(self) -> str:
         return f"{self.employee.name} - {self.date}"
     
+    class Meta:
+        db_table = 'employee_time'
+
+
+class Employee(Model):
+    name = CharField(max_length=255)
+    image = ImageField(upload_to='employees/', blank=True)
+    last_image = ImageField(upload_to='employees/last_images/', blank=True)
+    status = BooleanField(default=True)
+    created_time = DateTimeField(auto_now_add=True)
+    last_enter_time = DateTimeField(auto_now_add=True)
+    last_leave_time = DateTimeField(auto_now_add=True)
+    stay_time = IntegerField(default=0)
+    date = DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'employee'
+
+
+class EmployeeTime(Model):
+    employee = ForeignKey(Employee, on_delete=CASCADE)
+    created_time = DateTimeField(auto_now_add=True)
+    last_enter_time = DateTimeField(auto_now_add=True)
+    last_leave_time = DateTimeField(auto_now_add=True)
+    stay_time = IntegerField(default=0)
+    date = DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.employee.name} - {self.date}"
+
     class Meta:
         db_table = 'employee_time'
 

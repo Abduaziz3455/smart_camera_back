@@ -50,7 +50,6 @@ class EmployeeSerializer(serializers.ModelSerializer):
             data['last_image'] = data['last_image'].replace(f"{BASE_URL}/media", "/media")
         return data
 
-
     class Meta:
         model = Employee
         fields = '__all__'
