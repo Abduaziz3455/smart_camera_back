@@ -8,9 +8,9 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from django_filters.rest_framework import DjangoFilterBackend
 
 from admin_panel.custom_viewsets import Custom_Viewsub, Client_Viewsub, Camera_Viewsub
-from admin_panel.models import CustomUser, Client, Camera
+from admin_panel.models import CustomUser, Client, Employee, EmployeeTime, Camera
 from admin_panel.pagination import CustomPagination
-from admin_panel.serializers import UserSerializer, ClientSerializer, CameraSerializer
+from admin_panel.serializers import UserSerializer, ClientSerializer, EmployeeSerializer, CameraSerializer, EmployeeTimeSerializer
 
 # camera_list = [{'ip_address': '192.168.1.64', 'login': 'admin', 'password': 'softex2020', 'is_enter': True, 'real': 1}]
 # my_app = Face_App(cameras=camera_list)
@@ -35,6 +35,32 @@ class ClientViewSet(Client_Viewsub):
     search_fields = ['name']
     filter_backends = [DjangoFilterBackend, searchf.SearchFilter]
     filterset_fields = ['is_client', 'last_time']
+    # pagination_class = CustomUserPagination
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
+    parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.FileUploadParser)
+    renderer_classes = (renderers.JSONRenderer,)
+
+
+class EmployeeViewSet(Client_Viewsub):
+    queryset = Employee.objects.order_by('id')
+    serializer_class = EmployeeSerializer
+    search_fields = ['name']
+    filter_backends = [DjangoFilterBackend, searchf.SearchFilter]
+    filterset_fields = ['is_client']
+    # pagination_class = CustomUserPagination
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
+    parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.FileUploadParser)
+    renderer_classes = (renderers.JSONRenderer,)
+
+
+class EmployeeTimeViewSet(Client_Viewsub):
+    queryset = EmployeeTime.objects.order_by('id')
+    serializer_class = EmployeeTimeSerializer
+    # search_fields = ['name']
+    # filter_backends = [DjangoFilterBackend, searchf.SearchFilter]
+    # filterset_fields = ['is_client']
     # pagination_class = CustomUserPagination
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]

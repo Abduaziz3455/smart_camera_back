@@ -11,7 +11,6 @@ class CustomUser(AbstractUser):
         db_table = 'users'
 
 
-
 class Client(Model):
     name = CharField(max_length=255, unique=True)
     phone = CharField(max_length=255, null=True)
@@ -26,7 +25,7 @@ class Client(Model):
     leave_count = IntegerField(default=0)
     stay_time = IntegerField(default=0)
     image = ImageField(upload_to='clients/', blank=True)
-    last_image = ImageField(upload_to='clients/last_images/', blank=True)
+    last_image = ImageField(upload_to='last_images/', blank=True)
 
     def __str__(self):
         return self.name
@@ -42,6 +41,41 @@ class Client(Model):
 
     class Meta:
         db_table = 'client'
+
+
+class Employee(Model):
+    name = CharField(max_length=255)
+    image = ImageField(upload_to='employees/', blank=True)
+    last_image = ImageField(upload_to='last_images/', blank=True)
+    status = BooleanField(default=True)
+    created_time = DateTimeField(auto_now_add=True)
+    last_enter_time = DateTimeField(auto_now_add=True)
+    last_leave_time = DateTimeField(auto_now_add=True)
+    stay_time = IntegerField(default=0)
+    date = DateField(auto_now_add=True)
+    is_client = BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        db_table = 'employee'
+
+
+class EmployeeTime(Model):
+    employee = ForeignKey(Employee, on_delete=CASCADE)
+    created_time = DateTimeField(auto_now_add=True)
+    last_enter_time = DateTimeField(auto_now_add=True)
+    last_leave_time = DateTimeField(auto_now_add=True)
+    stay_time = IntegerField(default=0)
+    date = DateField(auto_now_add=True)
+    is_client = BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return f"{self.employee.name} - {self.date}"
+    
+    class Meta:
+        db_table = 'employee_time'
 
 
 class Camera(Model):

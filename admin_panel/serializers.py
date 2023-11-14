@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
-from admin_panel.models import CustomUser, Client, Camera
+from admin_panel.models import CustomUser, Client, Employee, EmployeeTime, Camera
 
 BASE_URL = ''
 if settings.DEBUG:
@@ -37,6 +37,27 @@ class ClientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Client
+        fields = '__all__'
+
+
+class EmployeeSerializer(serializers.ModelSerializer):
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        if data['image']:
+            data['image'] = data['image'].replace(f"{BASE_URL}/media", "/media")
+        if data['last_image']:
+            data['last_image'] = data['last_image'].replace(f"{BASE_URL}/media", "/media")
+
+    class Meta:
+        model = Employee
+        fields = '__all__'
+
+
+class EmployeeTimeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = EmployeeTime
         fields = '__all__'
 
 
