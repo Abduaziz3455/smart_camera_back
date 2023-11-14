@@ -67,39 +67,6 @@ class EmployeeTime(Model):
         db_table = 'employee_time'
 
 
-class Employee(Model):
-    name = CharField(max_length=255)
-    image = ImageField(upload_to='employees/', blank=True)
-    last_image = ImageField(upload_to='employees/last_images/', blank=True)
-    status = BooleanField(default=True)
-    created_time = DateTimeField(auto_now_add=True)
-    last_enter_time = DateTimeField(auto_now_add=True)
-    last_leave_time = DateTimeField(auto_now_add=True)
-    stay_time = IntegerField(default=0)
-    date = DateField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        db_table = 'employee'
-
-
-class EmployeeTime(Model):
-    employee = ForeignKey(Employee, on_delete=CASCADE)
-    created_time = DateTimeField(auto_now_add=True)
-    last_enter_time = DateTimeField(auto_now_add=True)
-    last_leave_time = DateTimeField(auto_now_add=True)
-    stay_time = IntegerField(default=0)
-    date = DateField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.employee.name} - {self.date}"
-
-    class Meta:
-        db_table = 'employee_time'
-
-
 class Camera(Model):
     name = CharField(max_length=255)
     ip_address = CharField(max_length=16)
