@@ -107,8 +107,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'smart_cam',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'USER': env.str('USERNAME'),
+        'PASSWORD': env.str('PASSWORD'),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
