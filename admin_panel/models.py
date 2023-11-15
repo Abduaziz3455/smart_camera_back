@@ -9,7 +9,6 @@ class CustomUser(AbstractUser):
     full_name = CharField(max_length=255, blank=True)
     phone = CharField(max_length=255, null=True)
     status = BooleanField(default=True)
-    created_time = DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.username

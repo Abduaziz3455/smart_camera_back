@@ -22,7 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'password']
+        fields = '__all__'
 
 
 class ClientEmployeeSerializer(serializers.ModelSerializer):

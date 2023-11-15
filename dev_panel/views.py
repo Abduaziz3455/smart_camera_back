@@ -18,7 +18,7 @@ class OrganizationViewSet(Organization_Viewsub):
     serializer_class = OrganizationSerializer
     search_fields = ['brand_name']
     filter_backends = [DjangoFilterBackend, searchf.SearchFilter]
-    filterset_fields = ['']
+    # filterset_fields = ['']
     # pagination_class = CustomUserPagination
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
