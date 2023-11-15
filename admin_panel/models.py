@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
         db_table = 'users'
 
 
-class Client(Model):
+class ClientEmployee(Model):
     name = CharField(max_length=255, unique=True)
     phone = CharField(max_length=255, null=True)
     status = BooleanField(default=True)
@@ -34,26 +34,26 @@ class Client(Model):
         db_table = 'client'
 
 
-class Employee(Model):
-    name = CharField(max_length=255)
-    image = ImageField(upload_to='employees/', blank=True)
-    last_image = ImageField(upload_to='last_images/', blank=True)
-    status = BooleanField(default=True)
-    created_time = DateTimeField(auto_now_add=True)
-    last_enter_time = DateTimeField(auto_now_add=True)
-    last_leave_time = DateTimeField(auto_now_add=True)
-    stay_time = IntegerField(default=0)
-    date = DateField(auto_now_add=True)
+# class Employee(Model):
+#     name = CharField(max_length=255)
+#     image = ImageField(upload_to='employees/', blank=True)
+#     last_image = ImageField(upload_to='last_images/', blank=True)
+#     status = BooleanField(default=True)
+#     created_time = DateTimeField(auto_now_add=True)
+#     last_enter_time = DateTimeField(auto_now_add=True)
+#     last_leave_time = DateTimeField(auto_now_add=True)
+#     stay_time = IntegerField(default=0)
+#     date = DateField(auto_now_add=True)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
     
-    class Meta:
-        db_table = 'employee'
+#     class Meta:
+#         db_table = 'employee'
 
 
-class EmployeeTime(Model):
-    employee = ForeignKey(Employee, on_delete=CASCADE)
+class ClientEmployeeTime(Model):
+    employee = ForeignKey(ClientEmployee, on_delete=CASCADE)
     created_time = DateTimeField(auto_now_add=True)
     last_enter_time = DateTimeField(auto_now_add=True)
     last_leave_time = DateTimeField(auto_now_add=True)

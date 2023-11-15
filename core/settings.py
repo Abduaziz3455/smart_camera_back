@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'admin_panel',
+    'dev_panel',
     'django_filters',
     'drf_yasg',  # swagger
     "corsheaders",

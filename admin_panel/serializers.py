@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
-from admin_panel.models import CustomUser, Client, Employee, EmployeeTime, Camera
+from admin_panel.models import CustomUser, ClientEmployee, ClientEmployeeTime, Camera
 
 BASE_URL = ''
 if settings.DEBUG:
@@ -25,7 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'password']
 
 
-class ClientSerializer(serializers.ModelSerializer):
+class ClientEmployeeSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -36,29 +36,29 @@ class ClientSerializer(serializers.ModelSerializer):
         return data
 
     class Meta:
-        model = Client
+        model = ClientEmployee
         fields = '__all__'
 
 
-class EmployeeSerializer(serializers.ModelSerializer):
+# class EmployeeSerializer(serializers.ModelSerializer):
 
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        if data['image']:
-            data['image'] = data['image'].replace(f"{BASE_URL}/media", "/media")
-        if data['last_image']:
-            data['last_image'] = data['last_image'].replace(f"{BASE_URL}/media", "/media")
-        return data
+#     def to_representation(self, instance):
+#         data = super().to_representation(instance)
+#         if data['image']:
+#             data['image'] = data['image'].replace(f"{BASE_URL}/media", "/media")
+#         if data['last_image']:
+#             data['last_image'] = data['last_image'].replace(f"{BASE_URL}/media", "/media")
+#         return data
 
-    class Meta:
-        model = Employee
-        fields = '__all__'
+#     class Meta:
+#         model = Employee
+#         fields = '__all__'
 
 
 class EmployeeTimeSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = EmployeeTime
+        model = ClientEmployeeTime
         fields = '__all__'
 
 

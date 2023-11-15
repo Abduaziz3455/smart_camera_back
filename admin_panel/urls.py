@@ -2,14 +2,14 @@ from django.urls import include, path
 from rest_framework import routers
 
 from admin_panel.swagger_views import DecoratedTokenRefreshView, DecoratedTokenObtainPairView
-from admin_panel.views import UserViewSet, ClientViewSet, EmployeeViewSet, CameraViewSet, EmployeeTimeViewSet, EmployeeViewSet
+from admin_panel.views import UserViewSet, ClientEmployeeViewSet, ClientEmployeeTimeViewSet, CameraViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
-router.register(r'clients', ClientViewSet)
+router.register(r'clients', ClientEmployeeViewSet)
 router.register(r'cameras', CameraViewSet)
-router.register(r'employees', EmployeeViewSet)
-router.register(r'employee_time', EmployeeTimeViewSet)
+# router.register(r'employees', EmployeeViewSet)
+router.register(r'employee_time', ClientEmployeeTimeViewSet)
 
 
 urlpatterns = [

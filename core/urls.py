@@ -23,6 +23,7 @@ urlpatterns = [
                   re_path(r'^$', schema_view.with_ui(
                       'swagger', cache_timeout=0), name='schema-swagger-ui'),
                   path('', include('admin_panel.urls')),
+                  path('', include('dev_panel.urls')),
                   re_path(r'^media/(?P<path>.*)$', serve,
                           {'document_root': settings.MEDIA_ROOT}),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
