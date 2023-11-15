@@ -6,7 +6,7 @@ from django.db.models import *
 
 class CustomUser(AbstractUser):
     avatar = ImageField(upload_to='users/', blank=True)
-    full_name = CharField(max_length=255)
+    full_name = CharField(max_length=255, blank=True)
     phone = CharField(max_length=255, null=True)
     status = BooleanField(default=True)
     created_time = DateTimeField(auto_now_add=True)
