@@ -15,4 +15,4 @@ class OrganizationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Organization
-        fields = '__all__'  
+        fields = '__all__'

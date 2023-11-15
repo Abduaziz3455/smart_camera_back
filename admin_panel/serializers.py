@@ -40,22 +40,7 @@ class ClientEmployeeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# class EmployeeSerializer(serializers.ModelSerializer):
-
-#     def to_representation(self, instance):
-#         data = super().to_representation(instance)
-#         if data['image']:
-#             data['image'] = data['image'].replace(f"{BASE_URL}/media", "/media")
-#         if data['last_image']:
-#             data['last_image'] = data['last_image'].replace(f"{BASE_URL}/media", "/media")
-#         return data
-
-#     class Meta:
-#         model = Employee
-#         fields = '__all__'
-
-
-class EmployeeTimeSerializer(serializers.ModelSerializer):
+class ClientEmployeeTimeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ClientEmployeeTime

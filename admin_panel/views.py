@@ -42,18 +42,6 @@ class ClientEmployeeViewSet(Client_Viewsub):
     renderer_classes = (renderers.JSONRenderer,)
 
 
-# class EmployeeViewSet(Client_Viewsub):
-#     queryset = Employee.objects.order_by('id')
-#     serializer_class = EmployeeSerializer
-#     search_fields = ['name']
-#     filter_backends = [DjangoFilterBackend, searchf.SearchFilter]
-#     # pagination_class = CustomUserPagination
-#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-#     authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
-#     parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.FileUploadParser)
-#     renderer_classes = (renderers.JSONRenderer,)
-
-
 class ClientEmployeeTimeViewSet(Client_Viewsub):
     queryset = ClientEmployeeTime.objects.order_by('id')
     serializer_class = ClientEmployeeTimeSerializer

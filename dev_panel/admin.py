@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Organization
+from dev_panel.models import Organization
 
 # Register your models here.
 
