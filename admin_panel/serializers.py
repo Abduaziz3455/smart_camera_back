@@ -22,8 +22,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'full_name', 'username', 'password', 'is_active', 'is_staff', 'is_superuser', 'date_joined',
-                  'last_login', 'avatar', 'user_permissions']
+        fields = ['id', 'full_name', 'username', 'password', 'organization', 'is_active', 'is_staff', 'is_superuser',
+                  'date_joined', 'last_login', 'avatar', 'user_permissions']
 
 
 class ClientEmployeeSerializer(serializers.ModelSerializer):

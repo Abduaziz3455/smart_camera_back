@@ -7,6 +7,7 @@ class Organization(Model):
     brand_name = CharField(max_length=255)
     subscription_ends_date = DateField()
     status = BooleanField(default=True)
+    token = CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.name
