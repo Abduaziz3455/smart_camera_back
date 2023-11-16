@@ -138,6 +138,9 @@ class Client_Viewsub(GenericViewSet):
     def perform_destroy(self, instance):
         instance.delete()
 
+    
+    
+
 
 class Camera_Viewsub(GenericViewSet):
 

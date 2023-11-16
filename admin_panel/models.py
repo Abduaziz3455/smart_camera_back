@@ -8,8 +8,6 @@ from dev_panel.models import Organization
 class CustomUser(AbstractUser):
     first_name = None
     last_name = None
-    groups = None
-    email = None
     is_active = BooleanField(default=True)
     avatar = ImageField(upload_to='users/', blank=True)
     full_name = CharField(max_length=255, blank=True)
@@ -37,11 +35,17 @@ class ClientEmployee(Model):
     enter_count = IntegerField(default=0)
     leave_count = IntegerField(default=0)
     stay_time = IntegerField(default=0)
-    image = ImageField(upload_to='clients/', blank=True)
-    last_image = ImageField(upload_to='last_images/', blank=True)
+    image = ImageField(upload_to='employees/images', blank=True)
+    last_image = ImageField(upload_to='employees/last_images/', blank=True)
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        if self.is_client:
+            self.image.path = 'clients/images'
+            self.last_image.path = 'clients/last_images'
+        super().save(*args, **kwargs)        
 
     class Meta:
         db_table = 'client'
