@@ -9,7 +9,7 @@ from admin_panel.custom_viewsets import Custom_Viewsub, Client_Viewsub, Camera_V
 from admin_panel.models import CustomUser, ClientEmployee, ClientEmployeeTime, Camera
 from admin_panel.serializers import UserSerializer, ClientEmployeeSerializer, ClientEmployeeTimeSerializer, \
     CameraSerializer
-from admin_panel.custom_permissions import IsAdminUser, IsSuperUser
+from admin_panel.custom_permissions import IsAdminUser, IsSuperUser, IsExpired
 
 
 # camera_list = [{'ip_address': '192.168.1.64', 'login': 'admin', 'password': 'softex2020', 'is_enter': True, 'real': 1}]
@@ -36,7 +36,7 @@ class ClientEmployeeViewSet(Client_Viewsub):
     filter_backends = [DjangoFilterBackend, searchf.SearchFilter]
     filterset_fields = ['is_client', 'last_time']
     # pagination_class = CustomUserPagination
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminUser, IsExpired]
     authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
     parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.FileUploadParser)
     renderer_classes = (renderers.JSONRenderer,)
@@ -49,7 +49,7 @@ class ClientEmployeeTimeViewSet(Client_Viewsub):
     # filter_backends = [DjangoFilterBackend, searchf.SearchFilter]
     # filterset_fields = ['is_client']
     # pagination_class = CustomUserPagination
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminUser, IsExpired]
     authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
     parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.FileUploadParser)
     renderer_classes = (renderers.JSONRenderer,)
@@ -62,7 +62,7 @@ class CameraViewSet(Camera_Viewsub):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['is_enter']
     # pagination_class = CustomUserPagination
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminUser, IsExpired]
     authentication_classes = [SessionAuthentication, BasicAuthentication, JWTAuthentication]
     parser_classes = (parsers.JSONParser, parsers.MultiPartParser, parsers.FileUploadParser)
     renderer_classes = (renderers.JSONRenderer,)

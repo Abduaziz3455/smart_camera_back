@@ -1,7 +1,9 @@
 from rest_framework import status
+from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from rest_framework.viewsets import GenericViewSet
+
 
 # from smart_cam.main_video import Face_App
 #
@@ -15,6 +17,8 @@ class Custom_Viewsub(GenericViewSet):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        if not serializer.validated_data['is_superuser'] and not 'organization' in serializer.validated_data:
+            raise ValidationError(detail="User organization must be filled!")
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response({'data': serializer.data}, status=status.HTTP_201_CREATED, headers=headers)

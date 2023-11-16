@@ -1,7 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
 
-from dev_panel.swagger_views import DecoratedTokenRefreshView, DecoratedTokenObtainPairView
 from dev_panel.views import OrganizationViewSet
 
 router = routers.DefaultRouter()
