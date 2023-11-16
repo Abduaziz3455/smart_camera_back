@@ -10,6 +10,4 @@ router.register(r'organizations', OrganizationViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('login/', DecoratedTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('login/refresh/', DecoratedTokenRefreshView.as_view(), name='token_refresh'),
 ]

@@ -22,7 +22,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = '__all__'
+        fields = ['id', 'full_name', 'username', 'password', 'is_active', 'is_staff', 'is_superuser', 'date_joined',
+                  'last_login', 'avatar', 'user_permissions']
 
 
 class ClientEmployeeSerializer(serializers.ModelSerializer):
@@ -41,6 +42,11 @@ class ClientEmployeeSerializer(serializers.ModelSerializer):
 
 
 class ClientEmployeeTimeSerializer(serializers.ModelSerializer):
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['employee_name'] = ClientEmployee.objects.get(id=data['employee']).name
+        return data
 
     class Meta:
         model = ClientEmployeeTime

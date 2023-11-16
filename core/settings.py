@@ -42,7 +42,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-    # 'EXCEPTION_HANDLER': 'orders.exceptions.custom_exception_handler',
+    'EXCEPTION_HANDLER': 'admin_panel.exceptions.custom_exception_handler',
 }
 
 SECRET_KEY = 'django-insecure-gi)h!x&!ej)+890(d-z#bqf!r=n&)#ktrzpes8ee%o^j3vl9%u'

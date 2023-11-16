@@ -1,14 +1,20 @@
 from django.contrib.auth.models import AbstractUser
 from django.db.models import *
+from dev_panel.models import Organization
 
 # admin_paneldagi user va dev_paneldagi admin
 
 
 class CustomUser(AbstractUser):
+    first_name = None
+    last_name = None
+    groups = None
+    email = None
+    is_active = BooleanField(default=True)
     avatar = ImageField(upload_to='users/', blank=True)
     full_name = CharField(max_length=255, blank=True)
     phone = CharField(max_length=255, null=True)
-    status = BooleanField(default=True)
+    organization = ForeignKey(Organization, on_delete=CASCADE, null=True)  
 
     def __str__(self):
         return self.username
