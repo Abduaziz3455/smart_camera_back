@@ -5,13 +5,6 @@ from rest_framework.settings import api_settings
 from rest_framework.viewsets import GenericViewSet
 
 
-# from smart_cam.main_video import Face_App
-#
-# camera_list = [{'ip_address': '192.168.1.64', 'login': 'admin', 'password': 'softex2020', 'is_enter': True}]
-# my_app = Face_App(cameras=camera_list)
-# my_app.run_function()
-
-
 class Custom_Viewsub(GenericViewSet):
 
     def create(self, request, *args, **kwargs):
@@ -141,9 +134,6 @@ class Client_Viewsub(GenericViewSet):
 
     def perform_destroy(self, instance):
         instance.delete()
-
-    
-    
 
 
 class Camera_Viewsub(GenericViewSet):

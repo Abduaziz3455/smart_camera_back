@@ -8,8 +8,6 @@ from uuid import uuid4
 class CustomUser(AbstractUser):
     first_name = None
     last_name = None
-    groups = None
-    email = None
     is_active = BooleanField(default=True)
     avatar = ImageField(upload_to='users/', blank=True)
     full_name = CharField(max_length=255, blank=True)
@@ -25,7 +23,7 @@ class CustomUser(AbstractUser):
 
 
 class ClientEmployee(Model):
-    id_name = UUIDField(primary_key=True, default=uuid4, editable=False)
+    # id_name = UUIDField(primary_key=True, default=uuid4, editable=False)
     name = CharField(max_length=255)
     phone = CharField(max_length=255, null=True)
     status = BooleanField(default=True)
@@ -48,9 +46,6 @@ class ClientEmployee(Model):
         if self.is_client:
             self._meta.get_field('image').upload_to = 'clients/images'
             self._meta.get_field('last_image').upload_to = 'clients/last_images'
-
-            #self.image.path = 'clients/images'
-            #self.last_image.path = 'clients/last_images'
         super().save(*args, **kwargs)        
 
     class Meta:
