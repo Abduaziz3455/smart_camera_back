@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
@@ -58,3 +60,23 @@ class CameraSerializer(serializers.ModelSerializer):
     class Meta:
         model = Camera
         fields = '__all__'
+
+
+class ClientStat_Serial(serializers.Serializer):
+    time = serializers.DateTimeField()
+    first_visit = serializers.IntegerField()
+    re_visit = serializers.IntegerField()
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        date = self.context.get('date', None)
+        if date:
+            if date == 'month':
+                data['time'] = datetime.strptime(data['time'], "%d.%m.%Y %H:%M").date().month
+            else:
+                data['time'] = datetime.strptime(data['time'], "%d.%m.%Y %H:%M").date().day
+        return data
+
+    class Meta:
+        model = ClientEmployee
+        fields = "__all__"
