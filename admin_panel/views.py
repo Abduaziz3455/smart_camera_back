@@ -1,8 +1,8 @@
 import threading
-from datetime import datetime
 
 from django.db.models import Count, Q
 from django.db.models.functions import TruncDay
+from django.http import JsonResponse
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_yasg import renderers
 from rest_framework import filters as searchf
@@ -82,23 +82,18 @@ class RunCameraView(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get(self, request):
-        action = request.query_params.get('action', 'start')
 
         global my_app
 
-        if action == 'start':
+        if 'my_app' not in globals():
             my_app = Face_App(cameras=camera_list)
             camera = threading.Thread(target=my_app.run_function)
             camera.start()
-            return Response({'data': 'Muvaffaqiyatli'})
-
-        elif action == 'stop':
-            camera = threading.Thread(target=my_app.stop)
-            camera.start()
-            return Response({'data': 'Muvaffaqiyatli'})
-
+            return JsonResponse({'data': 'Muvaffaqiyatli start berildi!'})
         else:
-            return Response({'error': 'Invalid action'})
+            my_app.stop()
+            del globals()['my_app']
+            return JsonResponse({'data': 'Muvaffaqiyatli stop qilindi!'})
 
 
 class ClientVisitStat(GenericAPIView):
